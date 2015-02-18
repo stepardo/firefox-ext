@@ -28,7 +28,7 @@ if (typeof wallabag == "undefined") {
 			var url = content.document.location.href;
 
 			var width = 600;
-			var height = 390;
+			var height = 530;
 			var left = window.mozInnerScreenX + (window.innerWidth - width) / 2;
 			var top = window.mozInnerScreenY + (window.innerHeight - height) / 2;
 			window.open(this._prefs.getCharPref("url") + "?action=add&url=" + btoa(url),
