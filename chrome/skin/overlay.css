@@ -1,7 +1,0 @@
-#wallabag-toolbar-button {
-  list-style-image: url("chrome://wallabag/skin/toolbar.png");
-}
-
-toolbar[iconsize="small"] #wallabag-toolbar-button {
-  list-style-image: url("chrome://wallabag/skin/toolbar-small.png");
-}
