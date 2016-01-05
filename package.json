@@ -1,7 +1,7 @@
 {
-  "title": "Wallabag-next",
-  "name": "wallabag-next",
-  "version": "1.0.0",
+  "title": "Wallabag",
+  "name": "wallabag",
+  "version": "2.0.0",
   "description": "Post URL to Wallabag",
   "main": "index.js",
   "author": "Alda Marteau-Hardi",
@@ -9,7 +9,6 @@
     "firefox": ">=38.0a1"
   },
   "license": "GPLv3",
-  "updateURL": "https://raw.githubusercontent.com/Aldarone/wallabag-extension-next/master/update.rdf",
   "preferences": [
     {
         "name": "wallabagUrl",
