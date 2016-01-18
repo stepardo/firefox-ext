@@ -31,8 +31,7 @@ if (typeof wallabag == "undefined") {
 			var height = 530;
 			var left = window.mozInnerScreenX + (window.innerWidth - width) / 2;
 			var top = window.mozInnerScreenY + (window.innerHeight - height) / 2;
-			window.open(this._prefs.getCharPref("url") + "?action=add&url=" + btoa(url),
-									"", "height=" + height + ",width=" + width + ",top=" + top + ",left=" + left + ",toolbar=no,menubar=no,scrollbars=no,status=no,dialog,modal");
+      openAndReuseOneTabPerAttribute("wallabag-tab", this._prefs.getCharPref("url") + "?action=add&url=" + btoa(url));
 			event.stopPropagation();
 		},
 
@@ -50,4 +49,47 @@ if (typeof wallabag == "undefined") {
 			}
 		});
 	}, false);
+}
+
+// function reused from mozilla documentation
+function openAndReuseOneTabPerAttribute(attrName, url) {
+  var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                     .getService(Components.interfaces.nsIWindowMediator);
+  for (var found = false, index = 0, tabbrowser = wm.getEnumerator('navigator:browser').getNext().gBrowser;
+       index < tabbrowser.tabContainer.childNodes.length && !found;
+       index++) {
+
+    // Get the next tab
+    var currentTab = tabbrowser.tabContainer.childNodes[index];
+  
+    // Does this tab contain our custom attribute?
+    if (currentTab.hasAttribute(attrName)) {
+
+      // Yes--select and focus it.
+      tabbrowser.selectedTab = currentTab;
+
+      // Steffen: also load the new url
+      tabbrowser.loadURI(url);
+
+      // Focus *this* browser window in case another one is currently focused
+      tabbrowser.ownerDocument.defaultView.focus();
+      found = true;
+    }
+  }
+
+  if (!found) {
+    // Our tab isn't open. Open it now.
+    var browserEnumerator = wm.getEnumerator("navigator:browser");
+    var tabbrowser = browserEnumerator.getNext().gBrowser;
+  
+    // Create tab
+    var newTab = tabbrowser.addTab(url);
+    newTab.setAttribute(attrName, "xyz");
+  
+    // Focus tab
+    tabbrowser.selectedTab = newTab;
+    
+    // Focus *this* browser window in case another one is currently focused
+    tabbrowser.ownerDocument.defaultView.focus();
+  }
 }
