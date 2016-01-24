@@ -1,0 +1,32 @@
+{
+  "title": "Wallabag",
+  "name": "wallabag",
+  "version": "2.0.0",
+  "description": "Post URL to Wallabag",
+  "main": "index.js",
+  "author": "Alda Marteau-Hardi",
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "license": "GPLv3",
+  "preferences": [
+    {
+        "name": "wallabagUrl",
+        "title": "Wallabag URL",
+        "type": "string",
+        "value": ""
+    },
+    {
+        "name": "wallabagWidth",
+        "title": "Window width",
+        "type": "integer",
+        "value": 600
+    },
+    {
+        "name": "wallabagHeight",
+        "title": "Window height",
+        "type": "integer",
+        "value": 530
+    }
+  ]
+}
