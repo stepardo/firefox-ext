@@ -31,7 +31,11 @@ if (typeof wallabag == "undefined") {
 			var height = 530;
 			var left = window.mozInnerScreenX + (window.innerWidth - width) / 2;
 			var top = window.mozInnerScreenY + (window.innerHeight - height) / 2;
-      openAndReuseOneTabPerAttribute("wallabag-tab", this._prefs.getCharPref("url") + "?action=add&url=" + btoa(url));
+			if (this._prefs.getBoolPref("usetab")) {
+				openAndReuseOneTabPerAttribute("wallabag-tab", this._prefs.getCharPref("url") + "?action=add&url=" + btoa(url));
+			} else {
+				window.open(this._prefs.getCharPref("url") + "?action=add&url=" + btoa(url), "", "height=" + height + ",width=" + width + ",top=" + top + ", left=" + left + ",toolbar=no,menubar=no,scrollbars=yes,status=no,dialog");
+			}
 			event.stopPropagation();
 		},
 
@@ -52,6 +56,7 @@ if (typeof wallabag == "undefined") {
 }
 
 // function reused from mozilla documentation
+// https://developer.mozilla.org/de/docs/Codeschnipsel/Tabbed_browser
 function openAndReuseOneTabPerAttribute(attrName, url) {
   var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                      .getService(Components.interfaces.nsIWindowMediator);

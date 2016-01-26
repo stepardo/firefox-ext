@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <setting type="string" pref="extensions.wallabag@gaulupeau.fr.url" title="Your wallabag URL" />
+  <setting type="string" pref="extensions.wallabag@gaulupeau.fr.url"    title="Your wallabag URL" />
+  <setting type="bool"   pref="extensions.wallabag@gaulupeau.fr.usetab" title="Open Tab instead of a dialog window" />
 </vbox>
