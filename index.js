@@ -9,7 +9,7 @@ var base64 = require('sdk/base64');
 
 var toolbarButton = ActionButton({
     id: 'wallabag-toolbar-button',
-    label: 'Bag it !',
+    label: 'Bag it!',
     icon: {
         '16': self.data.url('icon-16.png'),
         '32': self.data.url('icon-32.png'),
