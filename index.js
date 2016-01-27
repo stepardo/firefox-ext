@@ -6,7 +6,6 @@ var {ActionButton} = require('sdk/ui/button/action');
 var {openDialog} = require('sdk/window/utils');
 
 var base64 = require('sdk/base64');
-
 var toolbarButton = ActionButton({
     id: 'wallabag-toolbar-button',
     label: 'Bag it!',
@@ -28,9 +27,12 @@ var wallabag = {
     },
 
     postLink: function wallabagPostLink(linkInfo) {
-        var wallabagUrl = require('sdk/simple-prefs').prefs.wallabagUrl;
-        var height = require('sdk/simple-prefs').prefs.wallabagHeight;
-        var width = require('sdk/simple-prefs').prefs.wallabagWidth;
+        var prefs = require('sdk/simple-prefs').prefs;
+        var wallabagUrl = prefs.wallabagUrl;
+        var height = prefs.wallabagHeight;
+        var width = prefs.wallabagWidth;
+        var openTab = prefs.wallabagOpenTab;
+        var autoclose = prefs.wallabagAutoclose;
 
         var url = linkInfo.wallaUrl;
         var title = linkInfo.wallaTitle;
@@ -38,9 +40,12 @@ var wallabag = {
 
         var GET = [
             'action=add',
-            'autoclose=true',
             'url='+base64.encode(url),
         ];
+
+        if (autoclose) {
+            GET.push('autoclose=true');
+        }
 
         var features = [
             'height='+height,
@@ -53,11 +58,31 @@ var wallabag = {
             'dialog'
         ];
 
-        openDialog({
-            url: wallabagUrl+"?"+GET.join('&'),
-            features: features.join(',')
-        });
+        var postUrl = wallabagUrl+"?"+GET.join('&');
+
+        if (openTab) {
+            if (typeof myTab !== 'undefined')
+                myTab.url = postUrl;
+            else
+                tabs.open(postUrl);
+        } else {
+            openDialog({
+                url: postUrl,
+                features: features.join(',')
+            });
+        }
     }
 };
 
 toolbarButton.on('click', wallabag.buttonClick);
+
+tabs.on('open', function onOpen(tab) {
+  myTab = tab;
+  console.log("onopen");
+});
+
+tabs.on('close', function onClose(tab) {
+  delete myTab;
+  console.log("onclose tab");
+});
+
