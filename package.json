@@ -27,6 +27,18 @@
         "title": "Window height",
         "type": "integer",
         "value": 530
+    },
+    {
+        "name": "wallabagOpenTab",
+        "title": "Open a tab instead of a dialog window.",
+        "type": "bool",
+        "value": false
+    },
+    {
+        "name": "wallabagAutoclose",
+        "title": "Allow wallabag to close dialog/tab automatically.",
+        "type": "bool",
+        "value": false
     }
   ]
 }
