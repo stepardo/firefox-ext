@@ -1,6 +1,6 @@
 {
   "title": "Wallabag",
-  "name": "wallabag",
+  "name": "poche@gaulupeau.fr",
   "version": "2.0.0",
   "description": "Post URL to Wallabag",
   "main": "index.js",
