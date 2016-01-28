@@ -61,10 +61,21 @@ var wallabag = {
         var postUrl = wallabagUrl+"?"+GET.join('&');
 
         if (openTab) {
-            if (typeof myTab !== 'undefined')
+            if (typeof myTab !== 'undefined') {
                 myTab.url = postUrl;
-            else
-                tabs.open(postUrl);
+                myTab.activate();
+            } else
+                tabs.open({
+                    url: postUrl,
+                    onOpen: function onOpen(tab)
+                    {
+                        myTab = tab;
+                    },
+                    onClose: function onClose(tab)
+                    {
+                        delete myTab;
+                    }
+                    });
         } else {
             openDialog({
                 url: postUrl,
@@ -75,14 +86,4 @@ var wallabag = {
 };
 
 toolbarButton.on('click', wallabag.buttonClick);
-
-tabs.on('open', function onOpen(tab) {
-  myTab = tab;
-  console.log("onopen");
-});
-
-tabs.on('close', function onClose(tab) {
-  delete myTab;
-  console.log("onclose tab");
-});
 
