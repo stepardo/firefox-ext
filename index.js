@@ -78,11 +78,9 @@ toolbarButton.on('click', wallabag.buttonClick);
 
 tabs.on('open', function onOpen(tab) {
   myTab = tab;
-  console.log("onopen");
 });
 
 tabs.on('close', function onClose(tab) {
   delete myTab;
-  console.log("onclose tab");
 });
 
