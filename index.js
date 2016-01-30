@@ -1,6 +1,7 @@
 var self = require('sdk/self');
 var tabs = require('sdk/tabs');
 var workers = require('sdk/content/worker');
+var _ = require("sdk/l10n").get;
 
 var {ActionButton} = require('sdk/ui/button/action');
 var {openDialog} = require('sdk/window/utils');
@@ -23,6 +24,18 @@ function wallabagBagIt(url) {
     var width = prefs.wallabagWidth;
     var openTab = prefs.wallabagOpenTab;
     var autoclose = prefs.wallabagAutoclose;
+    
+    // If the URL is not set in the preferences, open the preference dialog for the add-on.
+    if (!wallabagUrl) {
+        var notifications = require("sdk/notifications");
+        notifications.notify({
+            title: _("cfg_msg_title"),
+            text: _("cfg_msg_text")
+        });
+        var am = require("sdk/preferences/utils");
+        am.open(self);
+        return;
+    }
 
     var GET = [
         'action=add',
