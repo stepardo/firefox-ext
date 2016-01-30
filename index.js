@@ -33,7 +33,6 @@ function wallabagBagIt(url) {
             text: _("cfg_msg_text")
         });
         var am = require("sdk/preferences/utils");
-        var self = require("sdk/self");
         am.open(self);
         return;
     }
