@@ -36,9 +36,9 @@
     },
     {
         "name": "wallabagAutoclose",
-        "title": "Allow wallabag to close dialog/tab automatically.",
+        "title": "Allow wallabag to close dialog window automatically.",
         "type": "bool",
-        "value": false
+        "value": true
     }
   ]
 }
