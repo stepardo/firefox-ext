@@ -36,7 +36,8 @@ function wallabagBagIt(url) {
         var am = require("sdk/preferences/utils");
         am.open(self);
         return;
-    } else if (!urls.isValidURI(wallabagUrl)) {
+    }
+    if (!urls.isValidURI(wallabagUrl)) {
         var notifications = require("sdk/notifications");
         notifications.notify({
             title: _("cfg_msg_title"),
