@@ -1,5 +1,6 @@
 var self = require('sdk/self');
 var tabs = require('sdk/tabs');
+var urls = require('sdk/url');
 var workers = require('sdk/content/worker');
 var _ = require("sdk/l10n").get;
 
@@ -31,6 +32,15 @@ function wallabagBagIt(url) {
         notifications.notify({
             title: _("cfg_msg_title"),
             text: _("cfg_msg_text")
+        });
+        var am = require("sdk/preferences/utils");
+        am.open(self);
+        return;
+    } else if (!urls.isValidURI(wallabagUrl)) {
+        var notifications = require("sdk/notifications");
+        notifications.notify({
+            title: _("cfg_msg_title"),
+            text: _("cfg_invalid_msg_text")
         });
         var am = require("sdk/preferences/utils");
         am.open(self);
